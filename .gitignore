@@ -1,0 +1,8 @@
+.env
+.env.*
+.npmrc
+__pycache__/
+*.sqlite*
+patch-candidates.json
+ticket-first-result.json
+review-result.json

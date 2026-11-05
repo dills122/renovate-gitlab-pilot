@@ -1,0 +1,12 @@
+# Merge this job into the target application's CI, retaining its existing workflow rules.
+# The trusted target runner/image must provide the workspace's Node and pinned pnpm.
+verify-workspace:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - test "$(pnpm --version)" = "$(node -p "require('./package.json').packageManager.split('@').pop().split('+')[0]")"
+    # Inject a temporary read-only user npmrc via the target runner or secret manager.
+    - test -r "$TARGET_USER_NPMRC"
+    - export NPM_CONFIG_USERCONFIG="$TARGET_USER_NPMRC"
+    - pnpm install --frozen-lockfile --store-dir "$(mktemp -d)"
+    - pnpm exec nx run-many -t build test --parallel=2

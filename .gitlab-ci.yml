@@ -1,0 +1,62 @@
+workflow:
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH && $CI_COMMIT_REF_PROTECTED == "true" && ($CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "schedule")'
+    - when: never
+
+default:
+  image:
+    name: "$PILOT_IMAGE"
+    entrypoint: [""]
+
+stages: [discover, write, review]
+
+discover-patches:
+  environment:
+    name: discovery
+    action: prepare
+  stage: discover
+  tags: [protected-renovate-discovery]
+  when: manual
+  allow_failure: false
+  resource_group: pilot-discovery
+  timeout: 10m
+  script:
+    - python3 scripts/pilot.py discover
+  artifacts:
+    paths: [patch-candidates.json]
+    expire_in: 7 days
+
+ticket-first:
+  stage: write
+  tags: [protected-renovate-writer]
+  needs:
+    - job: discover-patches
+      artifacts: true
+  when: manual
+  allow_failure: false
+  environment:
+    name: ticket-first
+    action: prepare
+  variables:
+    PILOT_STATE: /var/lib/renovate-reservations
+  resource_group: pilot-ticket-first
+  timeout: 15m
+  script:
+    - python3 scripts/pilot.py write
+  artifacts:
+    paths: [ticket-first-result.json]
+    expire_in: 7 days
+
+review-mr:
+  stage: review
+  tags: [protected-renovate-discovery]
+  environment: {name: review, action: prepare}
+  needs: [{job: ticket-first, artifacts: true}]
+  when: manual
+  allow_failure: false
+  script:
+    - python3 scripts/pilot.py review
+  artifacts:
+    when: always
+    paths: [review-result.json]
+    expire_in: 7 days

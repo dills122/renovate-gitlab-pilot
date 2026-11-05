@@ -1,0 +1,14 @@
+{
+  "repository": "your-group/your-sandbox",
+  "base": "main",
+  "branchPrefix": "renovate-pilot/",
+  "feed": "https://pkgs.dev.azure.com/YOUR-ORG/YOUR-PROJECT/_packaging/YOUR-FEED/npm/registry/",
+  "privateProbe": "@your-scope/example",
+  "lockfile": "pnpm-lock.yaml",
+  "requiredJobs": ["verify-workspace"],
+  "groups": {
+    "angular": {"manifest": "package.json", "section": "dependencies", "packages": ["@angular/core", "@angular/common"]},
+    "nx": {"manifest": "package.json", "section": "devDependencies", "packages": ["nx", "@nx/angular"]}
+  },
+  "jira": {"kind":"cloud","apiBase":"https://api.atlassian.com/ex/jira/YOUR-CLOUD-ID/rest/api/3","project":"CHANGE","issueType":"Story","extraFields":{}}
+}

@@ -49,3 +49,5 @@ The automation jobs also require Git, Renovate and pnpm. The supplied Dockerfile
 | GitLab and Jira | MR/commits, pipelines, human approvals, Story and backlink. Store or export evidence per the organization's retention policy; the sample CI artifacts expire after seven days. |
 
 The local lab proved fresh Story creation, grouped MR, reuse after retry and keyed commits after squash on GitLab EE 18.11.14 with Jira Cloud. This port adds workplace configuration, Azure feed access, persistent SQLite and a Data Center API option. Work-specific network access, Jira fields/permissions, runner isolation, approval enforcement and SLA remain pilot acceptance tests.
+
+For newer releases arriving before merge, see the [ticket-first update lifecycle policy](docs/update-lifecycle.md): story reuse, immutable plan revisions, supersession, retries and merge evidence. This is a proposed extension, not behavior implemented by the starter scripts.

@@ -137,3 +137,5 @@ High confidence in native Gradle, GitLab include, custom-manager, and post-upgra
 Next decision: choose one existing shared JVM artifact, or a tagged CI template if JVM standards are still being defined, for a three-repository pilot. The workflow extensions in this document are proposed; the executable starter remains scoped as described in the README.
 
 Sources S25–S38 are indexed in [workflow-sources.md](workflow-sources.md); all accessed 2026-11-06.
+
+See the [ticket-first update lifecycle policy](update-lifecycle.md) for story reuse, immutable plan revisions, supersession, cleanup and race-recovery tests.

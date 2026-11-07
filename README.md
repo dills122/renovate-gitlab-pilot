@@ -2,7 +2,7 @@
 
 Copy **the contents of this directory**, including the dotfiles, into a private work GitLab project such as `platform/renovate-automation`. This is the portable starter. The Research Depot experiments, local Docker Compose stack, and personal Jira site stay in the research repo. Nothing in this kit needs the Mac lab.
 
-Start with the [workplace handoff and owner requests](docs/handoff.md). For expansion beyond the initial workspace, see the [enterprise feature experiments](docs/feature-roadmap.md).
+Start with the [workplace handoff and owner requests](docs/handoff.md). For expansion beyond the initial workspace, see the [enterprise feature experiments](docs/feature-roadmap.md) and [polyrepo workflows and APM shared-skills rollout plan](docs/polyrepo-workflows.md). The latter includes four proposed local experiments covering JVM baselines, CI templates, canary/retry behavior, and Agent Package Manager skills releases.
 
 The first milestone is a read-only pipeline that uses the work runner to discover eligible Angular and Nx patches in one approved sandbox. Enable Jira and GitLab writes only after private feed access and target CI work. Start with manual jobs and independent human approvals.
 
